@@ -1,13 +1,13 @@
 <template>
   <div>
-    <md-toolbar class="md-primary">
+    <md-toolbar class="toolbar-bg-colour">
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
           <md-button class="md-icon-button">
-            <md-icon>{{ icon }}</md-icon>
+            <md-icon class="toolbar-text-colour">{{ icon }}</md-icon>
           </md-button>
 
-          <h3 class="md-title">{{ title }}</h3>
+          <h3 class="md-title toolbar-text-colour">{{ title }}</h3>
         </div>
       </div>
     </md-toolbar>
@@ -26,6 +26,12 @@ export default {
 </script>
 
 <style scoped>
+.toolbar-bg-colour {
+  background-color: #212121 !important;
+}
+.toolbar-text-colour {
+  color: #fff !important;
+}
 .md-toolbar + .md-toolbar {
   margin-top: 16px;
 }
