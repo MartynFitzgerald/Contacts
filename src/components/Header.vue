@@ -4,7 +4,7 @@
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
           <md-button class="md-icon-button">
-            <md-icon>people</md-icon>
+            <md-icon>{{ icon }}</md-icon>
           </md-button>
 
           <h3 class="md-title">{{ title }}</h3>
@@ -20,6 +20,7 @@ export default {
   props: {
     title: String,
     url: String,
+    icon: String,
   },
 };
 </script>

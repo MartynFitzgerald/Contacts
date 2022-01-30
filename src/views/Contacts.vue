@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <Header title="Contacts" />
+    <Header title="Contacts" icon="people" />
   </div>
 </template>
 
