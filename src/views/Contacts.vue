@@ -35,7 +35,14 @@
 
     <md-content class="md-scrollbar md-content">
       <md-list class="md-triple-line">
-        <md-list-item v-for="contact in contactsTemp" :key="contact.email" to="/contactInformation">
+        <md-list-item
+          v-for="contact in contactsTemp"
+          :key="contact.email"
+          :to="{
+            name: 'ContactInformation',
+            params: { contact: contact },
+          }"
+        >
           <md-avatar>
             <img v-bind:src="contact.picture.thumbnail" alt="People" />
           </md-avatar>
@@ -76,6 +83,7 @@ export default {
   },
   watch: {
     filter(val) {
+      console.log(this.contactsTemp);
       this.contactsTemp = this.contacts.filter(
         (x) =>
           x.name.first.toLowerCase().indexOf(val.toLowerCase()) > -1 ||

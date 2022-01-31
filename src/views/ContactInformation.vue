@@ -1,7 +1,75 @@
 <template>
   <div class="contactInformation">
     <Header title="Contact" icon="arrow_back" url="/" />
-    <h1>This is an Contact Information page</h1>
+    <md-list>
+      <md-list-item>
+        <md-icon>person</md-icon>
+        <span class="md-list-item-text">Age</span>
+        <span class="md-list-item-text">{{ contact.dob.age }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon class="md-primary">email</md-icon>
+        <span class="md-list-item-text">Email</span>
+        <span class="md-list-item-text">{{ contact.email }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon class="md-primary">phone</md-icon>
+        <span class="md-list-item-text">Mobile</span>
+        <span class="md-list-item-text">{{ contact.cell }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon class="md-primary">phone</md-icon>
+        <span class="md-list-item-text">Phone</span>
+        <span class="md-list-item-text">{{ contact.phone }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon>home</md-icon>
+        <span class="md-list-item-text">Address</span>
+        <span class="md-list-item-text">{{
+          contact.location.street.number + " " + contact.location.street.name
+        }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.city }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.state }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.postcode }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.country }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.country }}</span>
+      </md-list-item>
+
+      <md-list-item>
+        <md-icon></md-icon>
+        <span class="md-list-item-text"></span>
+        <span class="md-list-item-text">{{ contact.location.country }}</span>
+      </md-list-item>
+    </md-list>
   </div>
 </template>
 
@@ -14,5 +82,15 @@ export default {
   components: {
     Header,
   },
+  props: {
+    contact: Object,
+  },
 };
 </script>
+
+<style scoped>
+.image {
+  width: 100%;
+  height: 250px;
+}
+</style>
