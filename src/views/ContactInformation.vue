@@ -3,26 +3,26 @@
     <Header title="Contact" icon="arrow_back" url="/" />
     <md-list>
       <md-list-item>
-        <md-icon class="md-primary">person</md-icon>
-        <span class="md-list-item-text">Age</span>
+        <md-icon>person</md-icon>
+        <span class="md-list-item-text" style="color: #ff70a1">Age</span>
         <span class="md-list-item-text">{{ contact.dob.age }}</span>
       </md-list-item>
 
       <md-list-item :href="'mailto: ' + contact.email">
-        <md-icon class="md-primary">email</md-icon>
-        <span class="md-list-item-text">Email</span>
+        <md-icon>email</md-icon>
+        <span class="md-list-item-text" style="color: #ff70a1">Email</span>
         <span class="md-list-item-text">{{ contact.email }}</span>
       </md-list-item>
 
       <md-list-item :href="'tel: ' + contact.cell">
-        <md-icon class="md-primary">phone</md-icon>
-        <span class="md-list-item-text">Mobile</span>
+        <md-icon>phone</md-icon>
+        <span class="md-list-item-text" style="color: #ff70a1">Mobile</span>
         <span class="md-list-item-text">{{ contact.cell }}</span>
       </md-list-item>
 
       <md-list-item :href="'tel: ' + contact.phone">
-        <md-icon class="md-primary">phone</md-icon>
-        <span class="md-list-item-text">Phone</span>
+        <md-icon>phone</md-icon>
+        <span class="md-list-item-text" style="color: #ff70a1">Phone</span>
         <span class="md-list-item-text">{{ contact.phone }}</span>
       </md-list-item>
 
@@ -39,8 +39,8 @@
           )
         "
       >
-        <md-icon class="md-primary">home</md-icon>
-        <span class="md-list-item-text">Address</span>
+        <md-icon>home</md-icon>
+        <span class="md-list-item-text" style="color: #ff70a1">Address</span>
         <span class="md-list-item-text">{{
           contact.location.street.number + " " + contact.location.street.name
         }}</span>
@@ -81,7 +81,7 @@
         <span class="md-list-item-text"></span>
         <span class="md-list-item-text">{{ contact.location.country }}</span>
       </md-list-item>
-    </md-list>
+    </md-list>  
   </div>
 </template>
 
