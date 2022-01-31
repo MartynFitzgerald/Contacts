@@ -11,7 +11,7 @@ const routes = [
     component: Contacts,
   },
   {
-    path: "/ContactInformation",
+    path: "/contact/:id",
     name: "ContactInformation",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -30,4 +30,11 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  //Set document title to route name if contact details are not pass through parameters.
+  document.title = to.params.contact
+    ? to.params.contact.name.first + " " + to.params.contact.name.last
+    : to.name;
+  next();
+});
 export default router;

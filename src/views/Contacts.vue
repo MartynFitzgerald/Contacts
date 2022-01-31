@@ -40,7 +40,10 @@
           :key="contact.email"
           :to="{
             name: 'ContactInformation',
-            params: { contact: contact },
+            params: {
+              contact: contact,
+              id: contact.name.first + '.' + contact.name.last,
+            },
           }"
         >
           <md-avatar>
