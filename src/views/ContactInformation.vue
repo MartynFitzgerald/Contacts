@@ -1,6 +1,14 @@
 <template>
   <div class="contactInformation">
     <Header title="Contact" icon="arrow_back" url="/" />
+
+    <div class="container">
+      <img :src="contact.picture.large" />
+      <h2>
+        <span>{{ contact.name.first + ", " + contact.name.last }}</span>
+      </h2>
+    </div>
+
     <md-list>
       <md-list-item>
         <md-icon>person</md-icon>
@@ -101,8 +109,38 @@ export default {
 </script>
 
 <style scoped>
-.image {
+.container {
+  position: relative;
   width: 100%;
-  height: 250px;
+}
+
+.container h2 {
+  position: absolute;
+  bottom: 0px;
+  left: 8px;
+}
+
+.container h2 span {
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12.5px;
+}
+
+img,
+.container {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    display: block;
+  }
+  img {
+    width: 100%;
+    height: 250px;
+    display: block;
+  }
 }
 </style>
