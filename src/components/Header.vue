@@ -3,7 +3,7 @@
     <md-toolbar class="toolbar-bg-colour">
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" v-bind:to="url">
             <md-icon class="toolbar-text-colour">{{ icon }}</md-icon>
           </md-button>
 

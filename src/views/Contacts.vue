@@ -9,7 +9,7 @@
           <td>
             <md-field>
               <md-icon class="icon-text-colour">search</md-icon>
-              <md-input v-model="initial"></md-input>
+              <md-input v-model="filter"></md-input>
             </md-field>
           </td>
         </tr>
@@ -18,11 +18,14 @@
           <td style="width: 20%"><span class="md-title">Sort</span></td>
           <td>
             <md-field>
-              <label for="movie">Movie</label>
-              <md-select v-model="movie" name="movie" id="movie">
-                <md-option value="fight-club">Fight Club</md-option>
-                <md-option value="godfather">Godfather</md-option>
-                <md-option value="godfather-ii">Godfather II</md-option>
+              <md-select v-model="sort" name="sort" id="sort">
+                <md-option value="name.first">First Name</md-option>
+                <md-option value="name.last">Second Name</md-option>
+                <md-option value="email">Email</md-option>
+                <md-option value="gender">Gender</md-option>
+                <md-option value="nat">Nationality</md-option>
+                <md-option value="location.state">State</md-option>
+                <md-option value="location.country">Country</md-option>
               </md-select>
             </md-field>
           </td>
@@ -32,14 +35,16 @@
 
     <md-content class="md-scrollbar md-content">
       <md-list class="md-triple-line">
-        <md-list-item v-for="contact in contacts" :key="contact.email">
+        <md-list-item v-for="contact in contactsTemp" :key="contact.email" to="/contactInformation">
           <md-avatar>
             <img v-bind:src="contact.picture.thumbnail" alt="People" />
           </md-avatar>
 
           <div class="md-list-item-text">
             <span>{{ contact.name.first + ", " + contact.name.last }}</span>
-            <span style="color: #ff70a1">{{ contact.location.state + " / " + contact.location.country }}</span>
+            <span style="color: #ff70a1">{{
+              contact.location.state + " / " + contact.location.country
+            }}</span>
           </div>
 
           <md-button class="md-icon-button">
@@ -63,15 +68,46 @@ export default {
   },
   data() {
     return {
-      initial: "",
-      movie: "fight-club",
+      filter: "",
+      sort: "name.first",
       contacts: [],
+      contactsTemp: [],
     };
+  },
+  watch: {
+    filter(val) {
+      this.contactsTemp = this.contacts.filter(
+        (x) =>
+          x.name.first.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+          x.name.last.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+          x.location.state.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+          x.location.country.toLowerCase().indexOf(val.toLowerCase()) > -1
+      );
+    },
+    sort(val) {
+      let attributes = val.split(".");
+
+      this.contactsTemp = this.contacts.sort((a, b) => {
+        if (attributes.length > 1) {
+          return (
+            a[attributes[0]][attributes[1]].toLowerCase() -
+            b[attributes[0]][attributes[1]].toLowerCase()
+          );
+        } else {
+          return (
+            a[attributes[0]].toLowerCase() - b[attributes[0]].toLowerCase()
+          );
+        }
+      });
+    },
   },
   created() {
     fetch("https://randomuser.me/api/?results=50&amp;nat=gb")
       .then((response) => response.json())
-      .then((response) => (this.contacts = response.results));
+      .then((response) => {
+        this.contacts = response.results;
+        this.contactsTemp = response.results;
+      });
   },
 };
 </script>

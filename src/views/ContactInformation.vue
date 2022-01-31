@@ -1,6 +1,6 @@
 <template>
   <div class="contactInformation">
-    <Header title="Contact" icon="arrow_back" />
+    <Header title="Contact" icon="arrow_back" url="/" />
     <h1>This is an Contact Information page</h1>
   </div>
 </template>
