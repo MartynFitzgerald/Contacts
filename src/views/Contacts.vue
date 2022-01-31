@@ -36,7 +36,7 @@
     <md-content class="md-scrollbar md-content">
       <md-list class="md-triple-line">
         <md-list-item
-          v-for="contact in contactsTemp"
+          v-for="contact in contacts"
           :key="contact.email"
           :to="{
             name: 'ContactInformation',
@@ -81,24 +81,26 @@ export default {
       filter: "",
       sort: "name.first",
       contacts: [],
-      contactsTemp: [],
     };
   },
   watch: {
     filter(val) {
-      console.log(this.contactsTemp);
-      this.contactsTemp = this.contacts.filter(
-        (x) =>
-          x.name.first.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          x.name.last.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          x.location.state.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          x.location.country.toLowerCase().indexOf(val.toLowerCase()) > -1
-      );
+      var contacts = localStorage.getItem("contacts");
+
+      if (contacts != null) {
+        this.contacts = JSON.parse(contacts).filter(
+          (x) =>
+            x.name.first.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            x.name.last.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            x.location.state.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            x.location.country.toLowerCase().indexOf(val.toLowerCase()) > -1
+        );
+      }
     },
     sort(val) {
       let attributes = val.split(".");
 
-      this.contactsTemp = this.contacts.sort((a, b) => {
+      let contacts = this.contacts.sort((a, b) => {
         if (attributes.length > 1) {
           return (
             a[attributes[0]][attributes[1]].toLowerCase() -
@@ -110,15 +112,22 @@ export default {
           );
         }
       });
+      this.contacts = contacts;
     },
   },
   created() {
-    fetch("https://randomuser.me/api/?results=50&amp;nat=gb")
-      .then((response) => response.json())
-      .then((response) => {
-        this.contacts = response.results;
-        this.contactsTemp = response.results;
-      });
+    let contacts = localStorage.getItem("contacts");
+
+    if (contacts == null) {
+      fetch("https://randomuser.me/api/?results=50&amp;nat=gb")
+        .then((response) => response.json())
+        .then((response) => {
+          localStorage.setItem("contacts", JSON.stringify(response.results));
+          this.contacts = response.results;
+        });
+    } else {
+      this.contacts = JSON.parse(contacts);
+    }
   },
 };
 </script>
