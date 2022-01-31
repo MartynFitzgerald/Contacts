@@ -34,7 +34,7 @@
     </div>
 
     <md-content class="md-scrollbar md-content">
-      <md-list class="md-triple-line">
+      <md-list v-if="contacts.length > 0" class="md-triple-line">
         <md-list-item
           v-for="contact in contacts"
           :key="contact.email"
@@ -99,17 +99,15 @@ export default {
     },
     sort(val) {
       let attributes = val.split(".");
+      let contacts = [...this.contacts];
 
-      let contacts = this.contacts.sort((a, b) => {
+      contacts.sort(function (a, b) {
         if (attributes.length > 1) {
-          return (
-            a[attributes[0]][attributes[1]].toLowerCase() -
-            b[attributes[0]][attributes[1]].toLowerCase()
-          );
+          // eslint-disable-next-line prettier/prettier
+          return a[attributes[0]][attributes[1]].toLowerCase() > b[attributes[0]][attributes[1]].toLowerCase() ? 1 : b[attributes[0]][attributes[1]].toLowerCase() > a[attributes[0]][attributes[1]].toLowerCase() ? -1 : 0;
         } else {
-          return (
-            a[attributes[0]].toLowerCase() - b[attributes[0]].toLowerCase()
-          );
+          // eslint-disable-next-line prettier/prettier
+          return a[attributes[0]].toLowerCase() > b[attributes[0]].toLowerCase() ? 1 : b[attributes[0]].toLowerCase() > a[attributes[0]].toLowerCase() ? -1 : 0;
         }
       });
       this.contacts = contacts;

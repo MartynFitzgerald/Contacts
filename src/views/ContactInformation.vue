@@ -81,7 +81,7 @@
         <span class="md-list-item-text"></span>
         <span class="md-list-item-text">{{ contact.location.country }}</span>
       </md-list-item>
-    </md-list>  
+    </md-list>
   </div>
 </template>
 
